@@ -1,10 +1,7 @@
 package com.javaee.bitlab.servlets;
 
 import com.javaee.bitlab.db.DBConnection;
-import com.javaee.bitlab.db.DBManager;
 import com.javaee.bitlab.db.models.Item;
-import com.javaee.bitlab.db.models.Task;
-import com.javaee.bitlab.db.models.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,7 +9,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.io.Writer;
 import java.util.ArrayList;
 
 @WebServlet(value = "/home")

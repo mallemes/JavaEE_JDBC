@@ -5,9 +5,9 @@ public class Item {
     private Long id;
     private String name;
     private String description;
-    private double price;
+    private int price;
 
-    public Item(Long id, String name, String description, double price) {
+    public Item(Long id, String name, String description, int price) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -41,11 +41,11 @@ public class Item {
         this.description = description;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 }

@@ -31,7 +31,7 @@ public class DBConnection {
                 Item item = new Item(resultSet.getLong("id"),
                         resultSet.getString("name"),
                         resultSet.getString("description"),
-                        resultSet.getDouble("price"));
+                        resultSet.getInt("price"));
                 items.add(item);
             }
             statement.close();
@@ -51,7 +51,7 @@ public class DBConnection {
                 item = new Item(resultSet.getLong("id"),
                         resultSet.getString("name"),
                         resultSet.getString("description"),
-                        resultSet.getDouble("price"));
+                        resultSet.getInt("price"));
             }
             statement.close();
         } catch (Exception e) {
@@ -67,7 +67,7 @@ public class DBConnection {
                             "values (?, ?, ?)");
             statement.setString(1, item.getName());
             statement.setString(2, item.getDescription());
-            statement.setDouble(3, item.getPrice());
+            statement.setInt(3, item.getPrice());
             statement.executeUpdate();
             statement.close();
         } catch (Exception e) {
@@ -77,7 +77,7 @@ public class DBConnection {
 
     public static void deleteItem(Long id) {
         try {
-            PreparedStatement statement = connection.prepareStatement("delete items where id = ?");
+            PreparedStatement statement = connection.prepareStatement("delete from items where id = ?");
             statement.setLong(1, id);
             statement.executeUpdate();
             statement.close();
@@ -91,12 +91,12 @@ public class DBConnection {
             PreparedStatement statement = connection.prepareStatement(
                     "update items " +
                             "set name = ?," +
-                            "description = ?" +
+                            "description = ?, " +
                             "price = ?" +
                             "where id = ?");
             statement.setString(1, item.getName());
             statement.setString(2, item.getDescription());
-            statement.setDouble(3, item.getPrice());
+            statement.setInt(3, item.getPrice());
             statement.setLong(4, item.getId());
             statement.executeUpdate();
             statement.close();

@@ -19,7 +19,7 @@ public class AddItemServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws  IOException {
         String name = request.getParameter("name");
         String description = request.getParameter("description");
-        double price = Double.parseDouble(request.getParameter("price"));
+        int price = Integer.parseInt(request.getParameter("price"));
         DBConnection.addItem(new Item(null, name, description, price));
         response.sendRedirect("/?success");
     }

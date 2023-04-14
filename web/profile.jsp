@@ -64,11 +64,11 @@
     if (user != null) {
 %>
 <script>
-    let r1 = "<%=user.getFullName()%>" ;
-    const r2 =" <%=user.getEmail()%>" ;
-    const rs = "<%=user.getId()%>" ;
+    let r1 = "<%=user.getFullName()%>";
+    const r2 = " <%=user.getEmail()%>";
+    const rs = "<%=user.getId()%>";
 
-    const user = {id:rs, fullName:r1, email:r2}
+    const user = {id: rs, fullName: r1, email: r2}
     localStorage.setItem("user", JSON.stringify(user))
 </script>
 
@@ -94,17 +94,19 @@
 </div>
 
 <script>
-    function  logout(){
+    function logout() {
         localStorage.clear();
+        const text = location.href
+        location.href = text.replace("/profile", "/")
     }
+
     const activeUser = localStorage.getItem("user")
-    if (activeUser){
-        const  u = JSON.parse(activeUser)
+    if (activeUser) {
+        const u = JSON.parse(activeUser)
         document.getElementById("userName").innerText = u.fullName
         userEmail.innerText = u.email
     }
 </script>
-
 
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
