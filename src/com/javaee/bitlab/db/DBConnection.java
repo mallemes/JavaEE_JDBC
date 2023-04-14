@@ -2,7 +2,6 @@ package com.javaee.bitlab.db;
 
 import com.javaee.bitlab.db.models.Item;
 import com.javaee.bitlab.db.models.User;
-import org.postgresql.Driver;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -48,10 +47,12 @@ public class DBConnection {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM items where id = ?");
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
-            item = new Item(resultSet.getLong("id"),
-                    resultSet.getString("name"),
-                    resultSet.getString("description"),
-                    resultSet.getDouble("price"));
+            if (resultSet.next()) {
+                item = new Item(resultSet.getLong("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("description"),
+                        resultSet.getDouble("price"));
+            }
             statement.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -97,6 +98,42 @@ public class DBConnection {
             statement.setString(2, item.getDescription());
             statement.setDouble(3, item.getPrice());
             statement.setLong(4, item.getId());
+            statement.executeUpdate();
+            statement.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static User findUserThroughEmail(String email) {
+        User user = null;
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM users where email = ?");
+            statement.setString(1, email);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                user = new User(resultSet.getLong("id"),
+                        resultSet.getString("email"),
+                        resultSet.getString("password"),
+                        resultSet.getString("full_name"));
+            }
+            statement.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return user;
+    }
+
+    public static void RegisterUser(User user) {
+        try {
+            PreparedStatement statement = connection.prepareStatement(
+                    "INSERT into users " +
+                            "(email, password, full_name) " +
+                            "values (?, ?, ?)");
+            statement.setString(1, user.getEmail());
+            statement.setString(2, user.getPassword());
+            statement.setString(3, user.getFullName());
             statement.executeUpdate();
             statement.close();
         } catch (Exception e) {

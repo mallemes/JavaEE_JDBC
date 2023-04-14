@@ -18,20 +18,11 @@ import java.util.ArrayList;
 @WebServlet(value = "/home")
 public class HomeServlet extends HttpServlet {
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.setContentType("text/html; charset=UTF-8");
-        String name = request.getParameter("name");
-        String description = request.getParameter("description");
-        String deadline = request.getParameter("deadline");
-        DBManager.addTask(new Task(1L, name, description, deadline));
-        response.sendRedirect("/?success");
-    }
+
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html; charset=UTF-8");
         ArrayList<Item> items = DBConnection.getItems();
         request.setAttribute("items", items);
-
         request.getRequestDispatcher("/home.jsp").forward(request, response);
 
     }

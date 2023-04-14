@@ -10,56 +10,20 @@
           rel="stylesheet"
           integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp"
           crossorigin="anonymous">
-    <style>
-        body {
-            padding: 0;
-        }
-
-        .navbar {
-            display: flex;
-            padding: 20px;
-            justify-content: space-around;
-            background-color: rgba(211, 225, 211, 0.57);
-            color: #000000;
-        }
-
-        a {
-            text-decoration: none;
-            color: #000000;
-        }
-
-        .navbuttons {
-            margin-left: 10px;
-        }
-
-        .items {
-            padding-left: 80px;
-            padding-right: 80px;
-            padding-top: 30px;
-            display: grid;
-            grid-template-columns: 33% 33% 34%;
-            column-gap: 10px;
-            row-gap: 25px;
-        }
-
-    </style>
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
 <div class="navbar">
     <div>
         <strong>BITLAB SHOP</strong>
     </div>
-    <div>
+    <div id="navbar">
         <a class="navbuttons" href="/">Top Sales</a>
         <a class="navbuttons" href="/">New Sales</a>
-        <a class="navbuttons" href="/">By Category</a>
-        <a class="navbuttons" href="/login">Sign In</a>
     </div>
 </div>
 <div class="container" style="margin-top: 60px">
-    <%
-        ArrayList<Item> items = (ArrayList<Item>) request.getAttribute("items");
-    %>
+    <%ArrayList<Item> items = (ArrayList<Item>) request.getAttribute("items");%>
     <div class="content">
         <div class="main-text">
             <center>
@@ -73,14 +37,17 @@
                 <div class="card bg-light mb-3"
                      style="max-width: 18rem;box-shadow: 2px 2px 2px 2px rgba(0.6, 0.6, 0.6, 0.6);">
                     <div class="card-header">
-                        <center><h2><%out.print(item.getName());%></h2></center>
+                        <center><h2><%=item.getName()%>
+                        </h2></center>
                     </div>
                     <div class="card-body">
                         <center>
-                            <h3 class="card-title"><%out.print(item.getPrice());%>$</h3>
-                            <div><%out.print(item.getDescription());%></div>
+                            <h3 class="card-title"><%=item.getPrice()%>$</h3>
+                            <div><%=item.getDescription()%>
+                            </div>
                         </center>
-                        <button class="btn btn-success" style="width: 16rem;margin-top: 10px">detail</button>
+                        <a href="/details?id=<%=item.getId()%>" class="btn btn-success"
+                           style="width: 16rem;margin-top: 10px">detail</a>
                     </div>
                 </div>
                 <%}%>
@@ -89,6 +56,37 @@
         </div>
     </div>
 </div>
+<script>
+    const activeUser = localStorage.getItem("user")
+    const navbar = document.getElementById("navbar")
+    if (activeUser) {
+        let prf = Object.assign(document.createElement('a'), {
+            href: "/profile",
+            className: "navbuttons",
+            innerText: "profile"
+        })
+        let addI = Object.assign(document.createElement('a'), {
+            href: "/add_item",
+            className: "navbuttons",
+            innerText: "add Item"
+        })
+        navbar.appendChild(prf)
+        navbar.appendChild(addI)
+    } else {
+        const register = Object.assign(document.createElement('a'), {
+            href: "/register",
+            className: "navbuttons",
+            innerText: "register"
+        });
+        let login = Object.assign(document.createElement('a'), {
+            href: "/login",
+            className: "navbuttons",
+            innerText: "login"
+        });
+        navbar.appendChild(register)
+        navbar.appendChild(login)
+    }
+</script>
 
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

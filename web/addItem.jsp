@@ -2,13 +2,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Tasks</title>
+    <title>bitlab shop</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css"
           rel="stylesheet"
           integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp"
           crossorigin="anonymous">
     <link rel="stylesheet" href="./css/style.css">
-
 </head>
 <body>
 <div class="navbar">
@@ -18,46 +17,37 @@
     <div>
         <a class="navbuttons" href="/">Top Sales</a>
         <a class="navbuttons" href="/">New Sales</a>
-        <a class="navbuttons" href="/register">register</a>
-        <a class="navbuttons" href="/login">login</a>
+        <a class="navbuttons" href="/add_item">Add Item</a>
+        <a class="navbuttons" href="/profile">profile</a>
     </div>
 </div>
-<%
-    String error = (String) request.getAttribute("error");
-    if (error != null){
-%>
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
-    <strong>error</strong>  <%=error%>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-<%}%>
 <div class="container" style="margin-top: 60px">
-    <form action="/login" method="post" class="login">
+    <div  class="login">
         <div class="card bg-light mb-3" style="max-width: 46rem;box-shadow: 2px 2px 2px 2px rgba(0.6, 0.6, 0.6, 0.6);">
             <div class="card-header">
-                <h3>LOGIN PAGE</h3>
+                <h3>ADD ITEM</h3>
             </div>
-            <div class="card-body">
+            <form method="post" action="/add_item" class="card-body">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Email :</label>
-                    <input required type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                          name="email" placeholder="Enter email">
+                    <label for="exampleInputEmail1">name :</label>
+                    <input required type="text" class="form-control" name="name" id="exampleInputEmail1" aria-describedby="emailHelp"
+                           placeholder="name">
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Password :</label>
-                    <input name="password" required type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    <label for="exampleInputPassword1">Description :</label>
+                    <input required type="text" name="description" class="form-control" id="exampleInputPassword1" placeholder="Description">
                 </div>
-                <button class="btn btn-success" style="margin-top: 10px">login</button>
-            </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail3">Price :</label>
+                    <input required type="number" name="price" class="form-control" id="exampleInputEmail3" aria-describedby="emailHelp"
+                           placeholder="Price">
+                </div>
+                <button class="btn btn-success" type="submit" style="margin-top: 10px">submit</button>
+            </form>
         </div>
 
-    </form>
+    </div>
 </div>
-</div>
-
-
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
@@ -69,4 +59,3 @@
         crossorigin="anonymous"></script>
 </body>
 </html>
-<%--jdbc:postgresql://localhost:5432/bitlab_java_ee_db1--%>

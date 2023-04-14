@@ -7,31 +7,7 @@
           rel="stylesheet"
           integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp"
           crossorigin="anonymous">
-    <style>
-        body {
-            padding: 0;
-        }
-        .navbar {
-            display: flex;
-            padding: 20px;
-            justify-content: space-around;
-            background-color: rgba(211, 225, 211, 0.57);
-            color: #000000;
-        }
-
-        a {
-            text-decoration: none;
-            color: #000000;
-        }
-
-        .navbuttons {
-            margin-left: 10px;
-        }
-
-        .login {
-            margin-left: 15%;
-        }
-    </style>
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
 <div class="navbar">
@@ -41,36 +17,55 @@
     <div>
         <a class="navbuttons" href="/">Top Sales</a>
         <a class="navbuttons" href="/">New Sales</a>
-        <a class="navbuttons" href="/register">Register</a>
-        <a class="navbuttons" href="/login">Sign In</a>
+        <a class="navbuttons" href="/register">register</a>
+        <a class="navbuttons" href="/login">login</a>
     </div>
 </div>
 <div class="container" style="margin-top: 60px">
-    <div class="login">
+    <%
+        String error = (String) request.getAttribute("error");
+        String email = (String) request.getAttribute("email");
+        String fullName = (String) request.getAttribute("fullName");
+        if (error != null){
+    %>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>error</strong>  <%=error%>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <%}%>
+    <form method="post" action="/register" class="login">
         <div class="card bg-light mb-3" style="max-width: 46rem;box-shadow: 2px 2px 2px 2px rgba(0.6, 0.6, 0.6, 0.6);">
             <div class="card-header">
-                <h3>LOGIN PAGE</h3>
+                <h3>REGISTER PAGE</h3>
             </div>
             <div class="card-body">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email :</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                    <input  <%if (email != null){%>value="<%=email%>"<%}%> name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
                            placeholder="Enter email">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Password :</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    <input name="password" type="password" class="form-control" id="exampleInputPassword1"
+                           placeholder="enter Password">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword5">Re-enter password :</label>
+                    <input name="password2" type="password" class="form-control" id="exampleInputPassword5"
+                           placeholder="repeat Password">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail3">Full Name :</label>
-                    <input type="text" class="form-control" id="exampleInputEmail3" aria-describedby="emailHelp"
-                           placeholder="Enter email">
+                    <input  <%if (fullName != null){%>value="<%=fullName%>" <%}%> name="fullName" type="text" class="form-control" id="exampleInputEmail3" aria-describedby="emailHelp"
+                           placeholder="Enter full name">
                 </div>
                 <button class="btn btn-success" style="margin-top: 10px">register</button>
             </div>
         </div>
 
-    </div>
+    </form>
 </div>
 </div>
 
