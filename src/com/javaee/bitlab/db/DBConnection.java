@@ -8,15 +8,13 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-
 public class DBConnection {
     private static Connection connection;
 
     static {
         try {
-            Class.forName("org.postgresql.Driver");
-            connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/bitlab_java_ee_db1",
-                    "postgres", "postgre");
+            Class.forName("org.sqlite.JDBC");
+            connection = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\Admin\\IdeaProjects\\JavaEE_JDBC\\db.sqlite3", "", "");
         } catch (Exception e) {
             e.printStackTrace();
         }
