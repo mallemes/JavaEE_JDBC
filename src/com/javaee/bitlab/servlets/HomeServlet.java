@@ -1,7 +1,7 @@
 package com.javaee.bitlab.servlets;
 
-import com.javaee.bitlab.db.DBConnection;
-import com.javaee.bitlab.db.models.Item;
+import com.javaee.bitlab.database.DBConnection;
+import com.javaee.bitlab.database.models.Item;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -17,10 +17,10 @@ public class HomeServlet extends HttpServlet {
 
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         ArrayList<Item> items = DBConnection.getItems();
         request.setAttribute("items", items);
         request.getRequestDispatcher("/home.jsp").forward(request, response);
-
     }
 
 

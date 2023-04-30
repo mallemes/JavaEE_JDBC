@@ -1,8 +1,10 @@
-package com.javaee.bitlab.db;
+package com.javaee.bitlab.database;
 
-import com.javaee.bitlab.db.models.Item;
-import com.javaee.bitlab.db.models.User;
+import com.javaee.bitlab.database.models.Item;
+import com.javaee.bitlab.database.models.User;
 
+import java.io.File;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -14,7 +16,9 @@ public class DBConnection {
     static {
         try {
             Class.forName("org.sqlite.JDBC");
-            connection = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\Admin\\IdeaProjects\\JavaEE_JDBC\\db.sqlite3", "", "");
+            URL resource = DBConnection.class.getResource("db.sqlite3");
+            String path = new File(resource.toURI()).getAbsolutePath();
+            connection = DriverManager.getConnection(String.format("jdbc:sqlite:%s",path), "", "");
         } catch (Exception e) {
             e.printStackTrace();
         }

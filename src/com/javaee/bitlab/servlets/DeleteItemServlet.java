@@ -1,6 +1,6 @@
 package com.javaee.bitlab.servlets;
 
-import com.javaee.bitlab.db.DBConnection;
+import com.javaee.bitlab.database.DBConnection;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;

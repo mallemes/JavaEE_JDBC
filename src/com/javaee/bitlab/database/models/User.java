@@ -1,4 +1,4 @@
-package com.javaee.bitlab.db.models;
+package com.javaee.bitlab.database.models;
 
 public class User {
     private Long id;
